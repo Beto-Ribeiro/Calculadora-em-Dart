@@ -1,9 +1,11 @@
 import 'dart:io';
 
 void main() {
-  double numeroUm = double.parse(stdin.readLineSync()!);
-  double numeroDois = double.parse(stdin.readLineSync()!);
-  String operacao = stdin.readLineSync()!;
+  double numeroUm = 0;
+  double numeroDois = 0;
+  String operacao = "";
+  List<String> operacoes = <String>["+", "-", "*", "/"];
+  String? entrada;
 
   void Soma() {
     print(numeroUm + numeroDois);
@@ -21,19 +23,52 @@ void main() {
     print(numeroUm * numeroDois);
   }
 
-  if (operacao == "+") {
-    Soma();
+  void calcular() {
+    switch (operacao) {
+      case "+":
+        Soma();
+
+      case "-":
+        SUb();
+
+      case "/":
+        Div();
+
+      case "*":
+        Mul();
+
+        break;
+    }
   }
 
-  if (operacao == "-") {
-    SUb();
+  void getOperacao() {
+    print("Digite a operação desejada (+, -, *, /)");
+    entrada = stdin.readLineSync();
+    if (entrada != null) {
+      if (operacoes.contains(entrada)) {
+        operacao = entrada!;
+      }
+    }
   }
 
-  if (operacao == "/") {
-    Div();
+  print("Digite o primeiro valor");
+  entrada = stdin.readLineSync();
+  if (entrada != null) {
+    if (entrada != "") {
+      numeroUm = double.parse(entrada!);
+    }
   }
 
-  if (operacao == "*") {
-    Mul();
+  getOperacao();
+
+  print("Digite o segundo valor");
+  entrada = stdin.readLineSync();
+  if (entrada != null) {
+    if (entrada != "") {
+      numeroDois = double.parse(entrada!);
+    }
   }
+
+  print("O resultado é: ");
+  calcular();
 }
