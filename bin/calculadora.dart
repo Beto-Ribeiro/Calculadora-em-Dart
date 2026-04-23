@@ -42,11 +42,15 @@ void main() {
   }
 
   void getOperacao() {
-    print("Digite a operação desejada (+, -, *, /)");
+    print("Digite a operação desejada ${operacoes.toString()}");
     entrada = stdin.readLineSync();
     if (entrada != null) {
       if (operacoes.contains(entrada)) {
         operacao = entrada!;
+      }
+      else {
+        print("Operação inválida");
+        getOperacao();
       }
     }
   }
